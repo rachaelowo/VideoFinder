@@ -1,15 +1,14 @@
 const express = require("express");
 const axios = require("axios");
-const cors = require("cors");
 const path = require("path");
 
 const app = express();
-const PORT = process.env.PORT || 5000; 
+const PORT = process.env.PORT || 5000;
 
 const API_KEY = "AIzaSyDjzWmQDu7AdXBYuv167DTdbs61Gr1MbRM";
 
-app.use(cors());
-app.use(express.static("public")); 
+
+app.use(express.static(path.join(__dirname, "public")));
 
 
 app.get("/", (req, res) => {
@@ -27,7 +26,6 @@ app.get("/api/search", async (req, res) => {
   try {
     const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=6&q=${encodeURIComponent(query)}&key=${API_KEY}`;
     const response = await axios.get(url);
-
     res.json(response.data.items);
   } catch (error) {
     console.error("Error fetching YouTube data:", error.message);
