@@ -11,7 +11,7 @@ document.getElementById("searchBtn").addEventListener("click", async () => {
   }
 
   try {
-    const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+   const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
     const videos = await response.json();
 
     if (videos.length === 0) {
